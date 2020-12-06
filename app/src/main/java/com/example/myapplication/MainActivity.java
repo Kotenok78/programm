@@ -11,7 +11,6 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity {
 
     private TextView textView;
-
     private Button yesBtn;
     private Button noBtn;
     private Question[] questions = new Question[] {
@@ -21,7 +20,6 @@ public class MainActivity extends AppCompatActivity {
             new Question(R.string.question4,true),
             new Question(R.string.question5,true)
     };
-
 
 private int questionIndex = 0; //номер вопроса, первый = 0
     @Override
@@ -40,7 +38,11 @@ private int questionIndex = 0; //номер вопроса, первый = 0
                 Toast.makeText(MainActivity.this,R.string.correсt,Toast.LENGTH_SHORT).show();
             else //в противном случае пишет неправильно
                 Toast.makeText(MainActivity.this,R.string.incorreсt,Toast.LENGTH_SHORT).show();
-           questionIndex++;
+                if (questionIndex==questions.length-1) {
+                    finish();
+                } else
+            questionIndex++;
+
             textView.setText(questions[questionIndex].getQuestionResId());
             }
         });
@@ -52,6 +54,9 @@ private int questionIndex = 0; //номер вопроса, первый = 0
                 Toast.makeText(MainActivity.this,R.string.incorreсt,Toast.LENGTH_SHORT).show();
                else
                    Toast.makeText(MainActivity.this,R.string.correсt,Toast.LENGTH_SHORT).show();
+               if (questionIndex==questions.length-1) {
+                   finish();
+               } else
                questionIndex++; //перебор вопросов после нажатия кнопки
                textView.setText(questions[questionIndex].getQuestionResId());
 
